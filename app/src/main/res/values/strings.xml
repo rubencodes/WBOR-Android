@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">WBOR Brunswick 91.1FM</string>
+    <string name="hello_world">WBOR!</string>
+    <string name="action_settings">Settings</string>
+
+</resources>
