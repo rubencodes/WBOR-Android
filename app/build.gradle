@@ -1,20 +1,30 @@
 apply plugin: 'android'
 
 android {
-    compileSdkVersion 19
-    buildToolsVersion "19.0.3"
-
+    signingConfigs {
+        debug {
+            keyAlias 'wbor'
+            storeFile file('/Users/ruben/.keystore')
+            storePassword '1.618Phi1029Rox*'
+            keyPassword '1029rox*'
+        }
+    }
+    compileSdkVersion 22
+    buildToolsVersion '19.1.0'
     defaultConfig {
         minSdkVersion 8
-        targetSdkVersion 19
+        targetSdkVersion 22
         versionCode 1
-        versionName "1.0"
+        versionName "1.1"
+        signingConfig signingConfigs.debug
     }
     buildTypes {
         release {
-            runProguard false
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
+    }
+    productFlavors {
     }
 }
 

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/Users/ruben/Dropbox/Development/Java/WBOR-Android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/classes.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="d84409890828e07d344a3b9b1da545dba9897b51">
+        <dex dex="/Users/ruben/Dropbox/Development/Java/WBOR-Android/app/build/intermediates/pre-dexed/release/classes-fc5508ab73e489ac58f9fa9cb242b9f910536a19.jar" />
+    </item>
+    <item
+        jar="/Users/ruben/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/22.0.0/support-annotations-22.0.0.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="685d0b2c590447e85284ed84712cb363ba04eff8">
+        <dex dex="/Users/ruben/Dropbox/Development/Java/WBOR-Android/app/build/intermediates/pre-dexed/release/support-annotations-22.0.0-ec935e0f9d16bcf4c999fe4ebf175e5418f8d9c5.jar" />
+    </item>
+    <item
+        jar="/Users/ruben/Dropbox/Development/Java/WBOR-Android/app/build/intermediates/exploded-aar/com.android.support/gridlayout-v7/19.0.1/classes.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="b1701c49371231e0423b7588539f24bdab485019">
+        <dex dex="/Users/ruben/Dropbox/Development/Java/WBOR-Android/app/build/intermediates/pre-dexed/release/classes-7366e7fb4b8bf5c6c7dd71f112f4de120f596701.jar" />
+    </item>
+    <item
+        jar="/Users/ruben/Dropbox/Development/Java/WBOR-Android/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.0.0/classes.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="4e86306289ace4aa0cfec44a05ed2b410d36989d">
+        <dex dex="/Users/ruben/Dropbox/Development/Java/WBOR-Android/app/build/intermediates/pre-dexed/release/classes-df40074907f82f2bc5c24fce63bcfde5e1f20a02.jar" />
+    </item>
+    <item
+        jar="/Users/ruben/Dropbox/Development/Java/WBOR-Android/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.0.0/libs/internal_impl-22.0.0.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="b5b92f469d515a13d778900f6d50c03d12f35504">
+        <dex dex="/Users/ruben/Dropbox/Development/Java/WBOR-Android/app/build/intermediates/pre-dexed/release/internal_impl-22.0.0-52ff743a20e673b7ac515ff03fa6d4a0cdd8ceda.jar" />
+    </item>
+
+</items>

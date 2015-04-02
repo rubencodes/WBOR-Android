@@ -5,8 +5,6 @@ import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
@@ -18,7 +16,6 @@ import android.widget.TextView;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;
-import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
@@ -39,7 +36,7 @@ public class Home extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        this.setContentView(R.layout.activity_home);
 
         final TextView songText = (TextView) findViewById(R.id.textView);
         final TextView artistText = (TextView) findViewById(R.id.textView2);
@@ -50,38 +47,9 @@ public class Home extends ActionBarActivity {
         playButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if(!disabled) {
-                    try {
-                        disabled = true;
-                        //initializing media player
-                        songText.setText("Buffering...");
-                        RotateAnimation anim = new RotateAnimation(0.0f, 360.0f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+                    disabled = true;
 
-                        playButton.setBackgroundResource(R.drawable.play2);
-                        stopButton.setBackgroundResource(R.drawable.pause);
-                        anim.setInterpolator(new LinearInterpolator());
-                        anim.setRepeatCount(Animation.INFINITE); //Repeat animation indefinitely
-                        anim.setDuration(1200); //Put desired duration per anim cycle here, in milliseconds
-                        record.startAnimation(anim);
-                        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-                        mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-                            @Override
-                            public void onPrepared(MediaPlayer mediaPlayer) {
-                                mediaPlayer.start();
-                                getWBORinfo = new Timer();
-                                getWBORinfo.scheduleAtFixedRate(new TimerTask() {
-                                    @Override
-                                    public void run() {
-                                        new getWBORFeed().execute();
-                                    }
-                                }, 0, 60000);
-                            }
-                        });
-                        String url = "http://139.140.232.18:8000/WBOR"; // your URL here
-                        mediaPlayer.setDataSource(url);
-                        mediaPlayer.prepare(); // might take long! (for buffering, etc)
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                    new LoadStream().execute();
                 }
             }
         });
@@ -104,25 +72,56 @@ public class Home extends ActionBarActivity {
         });
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    private class LoadStream extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected void onPreExecute() {
+            TextView songText = (TextView) findViewById(R.id.textView);
+            Button playButton = (Button) findViewById(R.id.button);
+            Button stopButton = (Button) findViewById(R.id.button2);
+            ImageView record = (ImageView) findViewById(R.id.imageView2);
 
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.home, menu);
-        return true;
-    }
+            //initializing media player, set to defaults
+            songText.setText("Buffering...");
+            RotateAnimation anim = new RotateAnimation(0.0f, 360.0f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
+            playButton.setBackgroundResource(R.drawable.play2);
+            stopButton.setBackgroundResource(R.drawable.pause);
+            anim.setInterpolator(new LinearInterpolator());
+            anim.setRepeatCount(Animation.INFINITE); //Repeat animation indefinitely
+            anim.setDuration(1200); //Put desired duration per anim cycle here, in milliseconds
+            record.startAnimation(anim);
         }
-        return super.onOptionsItemSelected(item);
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            String url = "http://139.140.232.18:8000/WBOR"; // URL of stream
+
+            mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+            mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                @Override
+                public void onPrepared(MediaPlayer mediaPlayer) {
+                    mediaPlayer.start();
+                    getWBORinfo = new Timer();
+                    getWBORinfo.scheduleAtFixedRate(new TimerTask() {
+                        @Override
+                        public void run() {
+                            new getWBORFeed().execute();
+                        }
+                    }, 0, 60000);
+                }
+            });
+
+            try {
+                mediaPlayer.setDataSource(url);
+                mediaPlayer.prepare(); // might take long! (for buffering, etc)
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
     }
+
     private class getWBORFeed extends AsyncTask {
         protected void onPostExecute(Object result) {
             String jsonString = (String) result;
@@ -161,9 +160,7 @@ public class Home extends ActionBarActivity {
                         builder.append(line);
                     }
                 } else return "Network Error";
-            } catch (ClientProtocolException e) {
-                return "Network Error";
-            } catch (IOException e) {
+            } catch (Exception e) {
                 return "Network Error";
             }
             return builder.toString();
