@@ -32,7 +32,9 @@ import java.util.TimerTask;
 public class Home extends ActionBarActivity {
     MediaPlayer mediaPlayer = new MediaPlayer();
     Timer getWBORinfo;
-    boolean disabled = false;
+    boolean playDisabled = false;
+    boolean stopDisabled = true;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,8 +48,8 @@ public class Home extends ActionBarActivity {
 
         playButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if(!disabled) {
-                    disabled = true;
+                if(!playDisabled) {
+                    playDisabled = true;
 
                     new LoadStream().execute();
                 }
@@ -56,17 +58,20 @@ public class Home extends ActionBarActivity {
 
         stopButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if(disabled) {
+                if(!stopDisabled) {
+                    stopDisabled = true;
+                    record.setAnimation(null);
+                    playButton.setBackgroundResource(R.drawable.play);
+                    stopButton.setBackgroundResource(R.drawable.pause2);
+
                     mediaPlayer.stop();
                     mediaPlayer.reset();
                     getWBORinfo.cancel();
                     getWBORinfo.purge();
-                    record.setAnimation(null);
-                    playButton.setBackgroundResource(R.drawable.play);
-                    stopButton.setBackgroundResource(R.drawable.pause2);
+
                     songText.setText("");
                     artistText.setText("");
-                    disabled = false;
+                    playDisabled = false;
                 }
             }
         });
@@ -76,12 +81,14 @@ public class Home extends ActionBarActivity {
         @Override
         protected void onPreExecute() {
             TextView songText = (TextView) findViewById(R.id.textView);
+            TextView artistText = (TextView) findViewById(R.id.textView2);
             Button playButton = (Button) findViewById(R.id.button);
             Button stopButton = (Button) findViewById(R.id.button2);
             ImageView record = (ImageView) findViewById(R.id.imageView2);
 
             //initializing media player, set to defaults
             songText.setText("Buffering...");
+            artistText.setText("");
             RotateAnimation anim = new RotateAnimation(0.0f, 360.0f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
 
             playButton.setBackgroundResource(R.drawable.play2);
@@ -108,6 +115,7 @@ public class Home extends ActionBarActivity {
                             new getWBORFeed().execute();
                         }
                     }, 0, 60000);
+                    stopDisabled = false;
                 }
             });
 
@@ -119,6 +127,11 @@ public class Home extends ActionBarActivity {
             }
 
             return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+
         }
     }
 
