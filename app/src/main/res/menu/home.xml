@@ -1,5 +1,5 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.rmartinez.wbor.app.Home" >
+    tools:context="com.ruben.wbor.app.Home" >
 </menu>

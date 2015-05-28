@@ -2,13 +2,6 @@
 <items version="2" >
 
     <item
-        jar="/Users/ruben/Dropbox/Development/Java/WBOR-Android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/classes.jar"
-        jumboMode="false"
-        revision="19.1.0"
-        sha1="d84409890828e07d344a3b9b1da545dba9897b51">
-        <dex dex="/Users/ruben/Dropbox/Development/Java/WBOR-Android/app/build/intermediates/pre-dexed/release/classes-fc5508ab73e489ac58f9fa9cb242b9f910536a19.jar" />
-    </item>
-    <item
         jar="/Users/ruben/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/22.0.0/support-annotations-22.0.0.jar"
         jumboMode="false"
         revision="19.1.0"
@@ -21,6 +14,13 @@
         revision="19.1.0"
         sha1="b1701c49371231e0423b7588539f24bdab485019">
         <dex dex="/Users/ruben/Dropbox/Development/Java/WBOR-Android/app/build/intermediates/pre-dexed/release/classes-7366e7fb4b8bf5c6c7dd71f112f4de120f596701.jar" />
+    </item>
+    <item
+        jar="/Users/ruben/Dropbox/Development/Java/WBOR-Android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/classes.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="d84409890828e07d344a3b9b1da545dba9897b51">
+        <dex dex="/Users/ruben/Dropbox/Development/Java/WBOR-Android/app/build/intermediates/pre-dexed/release/classes-fc5508ab73e489ac58f9fa9cb242b9f910536a19.jar" />
     </item>
     <item
         jar="/Users/ruben/Dropbox/Development/Java/WBOR-Android/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.0.0/classes.jar"

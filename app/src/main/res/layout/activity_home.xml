@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.rmartinez.wbor.app.Home"
+    tools:context="com.ruben.wbor.app.Home"
     android:background="#0080FF">
     <ImageView
         android:layout_width="match_parent"
